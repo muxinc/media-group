@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sign Language (ASL)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/themes/prism.min.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="../dist/index.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.min.js"
+    ></script>
+    <script
+      type="module"
+      src="http://localhost:8002/dist/youtube-video-element.js"
+    ></script>
+    <style>
+      youtube-video {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+      }
+      .group-player {
+        line-height: 0;
+        position: relative;
+      }
+      .dock {
+        position: absolute;
+        right: 12px;
+        bottom: 60px;
+        width: 220px;
+        box-shadow: 0 5px 5px black;
+      }
+      .dock:hover {
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        box-shadow: 0 5px 5px transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Sign Language (ASL)</h1>
+    <br />
+
+    <div class="group-player">
+      <youtube-video
+        id="video"
+        group="asl"
+        src="https://www.youtube.com/watch?v=C7dPqrmDWxs"
+        controls
+        playsinline
+        muted
+      ></youtube-video>
+
+      <div class="dock">
+        <youtube-video
+          class="asl-video"
+          group="asl"
+          data-group-seek-precision="0.5"
+          src="https://www.youtube.com/watch?v=H3KSKS3TTbc"
+          controls
+          playsinline
+          muted
+        ></youtube-video>
+      </div>
+    </div>
+
+    <br />
+
+    <div class="controls">
+      <button id="playbtn">Play</button>
+      <button onclick="controller.currentTime += 10">+10s</button>
+      <button onclick="controller.currentTime -= 10">-10s</button>
+    </div>
+
+    <script>
+      let controller = video.groupController;
+
+      controller.addEventListener('play', (e) => {
+        console.log(e.type);
+        console.log('paused', controller.paused);
+        playbtn.textContent = 'Pause';
+      });
+
+      controller.addEventListener('playing', (e) => {
+        console.log(e.type);
+        console.log('paused', controller.paused);
+        playbtn.textContent = 'Pause';
+      });
+
+      controller.addEventListener('pause', (e) => {
+        console.log(e.type);
+        console.log('paused', controller.paused);
+        playbtn.textContent = 'Play';
+      });
+
+      controller.addEventListener('seeking', (e) => {
+        console.log(e.type);
+      });
+
+      controller.addEventListener('seeked', (e) => {
+        console.log(e.type);
+      });
+
+      playbtn.onclick = async () => {
+        if (controller.playbackState === 'waiting') {
+          controller.play();
+          return;
+        }
+        await (controller.paused ? controller.play() : controller.pause());
+        console.log('controller.paused state', controller.paused);
+      };
+
+      fetch('./nav.html')
+        .then((res) => res.text())
+        .then((text) => {
+          let tmp = document.createElement('template');
+          tmp.innerHTML = text;
+          document.body.prepend(tmp.content);
+        });
+
+      // let tmp = document.createElement('template');
+      // tmp.innerHTML = `<pre class="language-html"><code></code></pre>`;
+      // let code = tmp.content.querySelector('code');
+      // code.textContent = document.querySelector('jam-video').outerHTML;
+      // document.body.append(tmp.content);
+    </script>
+  </body>
+</html>

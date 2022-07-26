@@ -1,0 +1,34 @@
+html {
+  height: 100%;
+}
+
+body {
+  padding-bottom: 5rem;
+  padding-left: 310px;
+}
+
+jam-video {
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+@media (orientation: landscape) {
+  jam-video {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (orientation: portrait) {
+  jam-video {
+    aspect-ratio: 9 / 16;
+  }
+}
+
+pre[class^=language-] {
+  font-size: 13px;
+  padding: 0;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow-x: auto;
+  border-radius: 5px;
+}

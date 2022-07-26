@@ -1,0 +1,45 @@
+<style>
+  body {
+    padding-left: 320px;
+  }
+
+  .sidebar {
+    line-height: 2;
+    box-sizing: border-box;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+    position: fixed;
+    overflow-x: hidden;
+    overflow-y: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 310px;
+    padding: 0 25px;
+    z-index: 20;
+  }
+
+  @media (max-width: 480px) {
+    body {
+      padding-left: 10px;
+    }
+
+    .sidebar {
+      width: 0;
+      padding: 0;
+      border-right: 0;
+    }
+  }
+</style>
+<aside class="sidebar">
+  <h2>Media Group</h2>
+  <nav class="sidebar-nav">
+    <ul>
+      <li>
+        <a href="./index.html">Syncing Language Audio</a>
+      </li>
+      <li>
+        <a href="./sign-language.html">Sign Language (ASL)</a>
+      </li>
+    </ul>
+  </nav>
+</aside>

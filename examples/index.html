@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Syncing Language Audio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/themes/prism.min.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <script src="../dist/index.js"></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.min.js"
+    ></script>
+  </head>
+  <body>
+    <h1>Syncing Language Audio</h1>
+    <br />
+
+    <video preload="none" id="video" group="madmax" controls playsinline muted style="width: 100%;">
+      <source src="https://api.playerx.io/mad-max-fury-road-video-avc.mp4">
+    </video>
+
+    <audio id="audiofr" group="madmax" controls playsinline src="https://api.playerx.io/mad-max-fury-road-audio-fr.m4a" style="width: 100%;"></audio>
+
+    <br />
+    <br />
+
+    <div class="controls">
+      <button id="playbtn">Play</button>
+      <button onclick="controller.currentTime += 10">+10s</button>
+      <button onclick="controller.currentTime -= 10">-10s</button>
+      <button id="languagebtn">Change to English</button>
+    </div>
+
+    <script>
+      let controller = video.groupController;
+
+      controller.addEventListener('play', (e) => {
+        console.log(e.type);
+        playbtn.textContent = 'Pause';
+      });
+
+      controller.addEventListener('playing', (e) => {
+        console.log(e.type);
+        playbtn.textContent = 'Pause';
+      });
+
+      controller.addEventListener('pause', (e) => {
+        console.log(e.type);
+        playbtn.textContent = 'Play';
+      });
+
+      controller.addEventListener('seeking', (e) => {
+        console.log(e.type);
+      });
+
+      controller.addEventListener('seeked', (e) => {
+        console.log(e.type);
+      });
+
+      playbtn.onclick = () => {
+        if (controller.playbackState === 'waiting') {
+          controller.play()
+          return
+        }
+        controller.paused ? controller.play() : controller.pause();
+      }
+
+      languagebtn.onclick = () => {
+        if (languagebtn.textContent === 'Change to English') {
+          video.muted = false;
+          audiofr.muted = true;
+          languagebtn.textContent = 'Change to French';
+        } else {
+          video.muted = true;
+          audiofr.muted = false;
+          languagebtn.textContent = 'Change to English';
+        }
+      }
+
+      fetch('./nav.html')
+        .then((res) => res.text())
+        .then((text) => {
+          let tmp = document.createElement('template');
+          tmp.innerHTML = text;
+          document.body.prepend(tmp.content);
+        });
+
+      // let tmp = document.createElement('template');
+      // tmp.innerHTML = `<pre class="language-html"><code></code></pre>`;
+      // let code = tmp.content.querySelector('code');
+      // code.textContent = document.querySelector('jam-video').outerHTML;
+      // document.body.append(tmp.content);
+    </script>
+  </body>
+</html>
