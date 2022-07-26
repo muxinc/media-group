@@ -4,7 +4,8 @@
   "description": "Resurrection of mediagroup/MediaController which can be used to sync and control multiple audio / video elements.",
   "type": "module",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "module": "dist/index.js",
+  "types": "dist/types/index.d.ts",
   "files": [
     "src",
     "dist"
@@ -13,8 +14,11 @@
     "format": "prettier --write .",
     "lint": "eslint src/*",
     "test": "npm run lint",
-    "dev": "esbuild src/index.ts --bundle --outdir=dist --servedir=.",
-    "build": "esbuild src/index.ts --bundle --minify --sourcemap --outdir=dist"
+    "dev": "esbuild src/index.ts --bundle --format=esm --outdir=dist --servedir=.",
+    "build": "npm run build:iife && npm run build:esm && npm run build:types",
+    "build:iife": "esbuild src/index.ts --bundle --minify --sourcemap --outfile=dist/index.iife.js",
+    "build:esm": "esbuild src/index.ts --bundle --format=esm --minify --sourcemap --outdir=dist",
+    "build:types": "tsc --declaration --emitDeclarationOnly --outDir dist/types"
   },
   "repository": "luwes/media-group",
   "author": "Wesley Luyten <me@wesleyluyten.com> (https://wesleyluyten.com)",

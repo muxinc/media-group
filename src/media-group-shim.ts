@@ -1,7 +1,8 @@
 import { MediaGroupController } from './media-group-controller';
 
 declare global {
-  interface HTMLMediaElement { // eslint-disable-line
+  // eslint-disable-next-line
+  interface HTMLMediaElement {
     groupController: MediaGroupController;
     group: string;
   }
@@ -29,6 +30,8 @@ const config = {
   subtree: true,
 };
 observer.observe(document, config);
+
+document.querySelectorAll('[group]').forEach(toggleMediaGroup);
 
 function toggleMediaGroup(node: Node) {
   const mediaElement = node as HTMLMediaElement;

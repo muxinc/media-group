@@ -1,10 +1,7 @@
-
 // not sure if this is needed
 // would be something like <media-group><video/><audio/></media-group>
 
-class MediaGroup extends HTMLElement {
-
-}
+class MediaGroup extends HTMLElement {}
 
 if (
   globalThis.customElements.get('media-group') ||

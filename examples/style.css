@@ -24,7 +24,7 @@ jam-video {
   }
 }
 
-pre[class^=language-] {
+pre[class^='language-'] {
   font-size: 13px;
   padding: 0;
   box-sizing: border-box;
