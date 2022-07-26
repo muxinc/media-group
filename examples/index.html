@@ -64,6 +64,10 @@
         console.log(e.type);
       });
 
+      controller.addEventListener('waiting', (e) => {
+        console.log(e.type);
+      });
+
       playbtn.onclick = () => {
         if (controller.playbackState === 'waiting') {
           controller.play()

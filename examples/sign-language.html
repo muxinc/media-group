@@ -110,6 +110,10 @@
         console.log(e.type);
       });
 
+      controller.addEventListener('waiting', (e) => {
+        console.log(e.type);
+      });
+
       playbtn.onclick = async () => {
         if (controller.playbackState === 'waiting') {
           controller.play();

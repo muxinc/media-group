@@ -97,7 +97,10 @@ export class MediaGroupController extends EventTarget {
         if (media !== this.#baseMedia) {
           if (!this.#promises.currentTime) {
             const diff = Math.abs(this.currentTime - media.currentTime);
-            if (diff > (toNumberOrUndefined(media.dataset.groupSeekPrecision) ?? 0.5)) {
+            if (
+              diff >
+              (toNumberOrUndefined(media.dataset.groupSeekPrecision) ?? 0.5)
+            ) {
               this.currentTime = media.currentTime;
             }
           }
@@ -119,15 +122,20 @@ export class MediaGroupController extends EventTarget {
         this.#prevPlaybackRate = this.playbackRate;
         this.playbackRate = 0;
         this.dispatchEvent(new Event('waiting'));
+
+        const interval = setInterval(() => {
+          if (
+            this.#prevPlaybackRate != null &&
+            this.#mediaList.every((media) => media.readyState >= 3)
+          ) {
+            clearInterval(interval);
+            this.playbackRate = this.#prevPlaybackRate;
+            this.#prevPlaybackRate = undefined;
+          }
+        }, 100);
       },
       progress: () => {
         this.dispatchEvent(new Event('progress'));
-        if (this.#prevPlaybackRate == null) return;
-
-        if (this.#mediaList.every((media) => media.readyState >= 3)) {
-          this.playbackRate = this.#prevPlaybackRate
-          this.#prevPlaybackRate = undefined;
-        }
       },
       volumechange: ({ currentTarget }) => {
         if (currentTarget !== this.#baseMedia) return;
@@ -298,7 +306,10 @@ export class MediaGroupController extends EventTarget {
           return;
         }
 
-        if (sourcePlaybackRate > 0 && child.playbackRate != sourcePlaybackRate) {
+        if (
+          sourcePlaybackRate > 0 &&
+          child.playbackRate != sourcePlaybackRate
+        ) {
           child.playbackRate = sourcePlaybackRate;
         }
 
