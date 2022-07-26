@@ -39,6 +39,7 @@ export class MediaGroupController extends EventTarget {
   }
 
   #mediaElements: Set<HTMLMediaElement> = new Set();
+  // eslint-disable-next-line
   #listeners: Record<string, EventListenerOrEventListenerObject> = {};
   #promises: Record<string, PublicPromise<void> | undefined> = {
     play: undefined,
@@ -82,8 +83,6 @@ export class MediaGroupController extends EventTarget {
         }
       },
       timeupdate: ({ currentTarget }) => {
-        const media = currentTarget as HTMLMediaElement;
-        // console.log(media?.localName, media?.currentTime);
         if (currentTarget !== this.#baseMedia) return;
 
         this.dispatchEvent(new Event('timeupdate'));
@@ -485,8 +484,9 @@ function toNumberOrUndefined(val: any) {
  * @return {Promise}
  */
 class PublicPromise<T> extends Promise<T> {
-  resolve?: (value?: T | PromiseLike<T>) => void;
-  reject?: (reason?: any) => void;
+  resolve?: () => void;
+  reject?: () => void;
+  // eslint-disable-next-line
   constructor(executor = (r: Function, j: Function) => {}) {
     let res, rej;
     super((resolve, reject) => {

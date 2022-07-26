@@ -1,7 +1,7 @@
 import { MediaGroupController } from './media-group-controller';
 
 declare global {
-  interface HTMLMediaElement {
+  interface HTMLMediaElement { // eslint-disable-line
     groupController: MediaGroupController;
     group: string;
   }

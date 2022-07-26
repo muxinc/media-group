@@ -11,8 +11,8 @@
   ],
   "scripts": {
     "format": "prettier --write .",
-    "lint": "eslint .",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src/*",
+    "test": "npm run lint",
     "dev": "esbuild src/index.ts --bundle --outdir=dist --servedir=.",
     "build": "esbuild src/index.ts --bundle --minify --sourcemap --outdir=dist"
   },
@@ -24,6 +24,7 @@
     "url": "https://github.com/luwes/media-group/issues"
   },
   "devDependencies": {
+    "@typescript-eslint/parser": "^5.31.0",
     "esbuild": "^0.14.43",
     "eslint": "^8.17.0",
     "prettier": "^2.6.2",
@@ -43,6 +44,7 @@
       "es6": true,
       "mocha": true
     },
+    "parser": "@typescript-eslint/parser",
     "extends": [
       "eslint:recommended"
     ],
