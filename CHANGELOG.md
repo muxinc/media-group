@@ -1,3 +1,12 @@
+## [0.1.2](https://github.com/luwes/media-group/compare/v0.1.1...v0.1.2) (2022-07-26)
+
+
+### Bug Fixes
+
+* async script loading, update examples ([a755efb](https://github.com/luwes/media-group/commit/a755efb48f5d71db9934cf4ccc3521e3fcb19a09))
+
+
+
 ## 0.1.1 (2022-07-26)
 
 ### Bug Fixes
