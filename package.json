@@ -13,7 +13,7 @@
   "scripts": {
     "format": "prettier --write .",
     "lint": "eslint src/*",
-    "test": "npm run lint",
+    "test": "web-test-runner **/*test.js --config test/web-test-runner.config.mjs",
     "dev": "esbuild src/index.ts --bundle --format=esm --outdir=dist --servedir=.",
     "build": "npm run build:iife && npm run build:esm && npm run build:types",
     "build:iife": "esbuild src/index.ts --bundle --minify --sourcemap --outfile=dist/index.iife.js",
@@ -28,7 +28,10 @@
     "url": "https://github.com/luwes/media-group/issues"
   },
   "devDependencies": {
+    "@open-wc/testing": "^3.1.6",
     "@typescript-eslint/parser": "^5.31.0",
+    "@web/dev-server-esbuild": "^0.3.1",
+    "@web/test-runner": "^0.13.31",
     "esbuild": "^0.14.50",
     "eslint": "^8.20.0",
     "prettier": "^2.6.2",

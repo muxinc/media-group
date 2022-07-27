@@ -2,7 +2,7 @@
 
 Resurrection of the [mediagroup attribute](https://html.spec.whatwg.org/commit-snapshots/a4c46fc65e8ba138baeadf0bd1c2055b7bb43863/#attr-media-mediagroup) and [MediaController API](https://html.spec.whatwg.org/commit-snapshots/a4c46fc65e8ba138baeadf0bd1c2055b7bb43863/#synchronising-multiple-media-elements) (but renamed) which can be used to sync and control multiple audio / video elements.
 
-⚠️ This library is designed as a ponyfill but note that `MediaController` is renamed to `MediaGroupController` and the `mediagroup` attribute is renamed to just `group` to avoid any issues with Safari where the original API is still implemented (while not working properly).
+⚠️ This library is designed as a polyfill but note that `MediaController` is renamed to `MediaGroupController` and the `mediagroup` attribute is renamed to just `group` to avoid any issues with Safari where the original API is still implemented (while not working properly).
 
 ## Example ([CodeSandbox](https://codesandbox.io/s/media-group-4p9v81))
 

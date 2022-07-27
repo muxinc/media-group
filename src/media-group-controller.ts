@@ -28,12 +28,20 @@ export class MediaGroupController extends EventTarget {
   }
 
   static setId(mediaElement: HTMLMediaElement, groupId?: string) {
-    if (groupId) {
+    if (groupId != null) {
+      if (mediaElement.getAttribute('group') != groupId) {
+        mediaElement.setAttribute('group', groupId);
+      }
+
       const controller = controllers[groupId] ?? new MediaGroupController();
       controller.#id = groupId;
       controllers[groupId] = controller;
       this.set(mediaElement, controller);
       return;
+    }
+
+    if (mediaElement.hasAttribute('group')) {
+      mediaElement.removeAttribute('group');
     }
     this.set(mediaElement, undefined);
   }
@@ -48,7 +56,7 @@ export class MediaGroupController extends EventTarget {
   };
   #correctionTime = 0.5;
   #seekThreshold = 1;
-  #syncTimeoutId: number;
+  #syncTimeoutId: ReturnType<typeof setTimeout>;
   #diffSamples: number[] = [];
   #lastSeek = 0;
   #id = uniqueId('g');
