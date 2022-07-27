@@ -66,6 +66,54 @@ export class MediaGroupController extends EventTarget {
     super();
 
     this.#listeners = {
+      emptied: ({ currentTarget }) => {
+        if (currentTarget !== this.#baseMedia) return;
+        this.dispatchEvent(new Event('emptied'));
+      },
+      durationchange: ({ currentTarget }) => {
+        if (currentTarget !== this.#baseMedia) return;
+        this.dispatchEvent(new Event('durationchange'));
+      },
+      volumechange: ({ currentTarget }) => {
+        if (currentTarget !== this.#baseMedia) return;
+        this.dispatchEvent(new Event('volumechange'));
+      },
+      ratechange: ({ currentTarget }) => {
+        if (currentTarget !== this.#baseMedia) return;
+        this.dispatchEvent(new Event('ratechange'));
+      },
+      timeupdate: ({ currentTarget }) => {
+        if (currentTarget !== this.#baseMedia) return;
+        this.dispatchEvent(new Event('timeupdate'));
+      },
+      ended: ({ currentTarget }) => {
+        if (currentTarget !== this.#baseMedia) return;
+        this.dispatchEvent(new Event('ended'));
+      },
+      seeked: ({ currentTarget }) => {
+        if (currentTarget !== this.#baseMedia) return;
+        this.dispatchEvent(new Event('seeked'));
+      },
+      playing: ({ currentTarget }) => {
+        if (currentTarget !== this.#baseMedia) return;
+        this.dispatchEvent(new Event('playing'));
+      },
+      loadedmetadata: ({ currentTarget }) => {
+        if (currentTarget !== this.#baseMedia) return;
+        this.dispatchEvent(new Event('loadedmetadata'));
+      },
+      loadeddata: ({ currentTarget }) => {
+        if (currentTarget !== this.#baseMedia) return;
+        this.dispatchEvent(new Event('loadeddata'));
+      },
+      canplay: ({ currentTarget }) => {
+        if (currentTarget !== this.#baseMedia) return;
+        this.dispatchEvent(new Event('canplay'));
+      },
+      canplaythrough: ({ currentTarget }) => {
+        if (currentTarget !== this.#baseMedia) return;
+        this.dispatchEvent(new Event('canplaythrough'));
+      },
       play: ({ currentTarget }) => {
         if (!this.#promises.play) {
           this.play();
@@ -74,11 +122,6 @@ export class MediaGroupController extends EventTarget {
         if (currentTarget === this.#baseMedia) {
           this.dispatchEvent(new Event('play'));
         }
-      },
-      playing: ({ currentTarget }) => {
-        if (currentTarget !== this.#baseMedia) return;
-
-        this.dispatchEvent(new Event('playing'));
       },
       pause: ({ currentTarget }) => {
         // don't trigger a final pause while seeking, some players pause internally while seeking.
@@ -89,16 +132,6 @@ export class MediaGroupController extends EventTarget {
         if (currentTarget === this.#baseMedia) {
           this.dispatchEvent(new Event('pause'));
         }
-      },
-      timeupdate: ({ currentTarget }) => {
-        if (currentTarget !== this.#baseMedia) return;
-
-        this.dispatchEvent(new Event('timeupdate'));
-      },
-      ended: ({ currentTarget }) => {
-        if (currentTarget !== this.#baseMedia) return;
-
-        this.dispatchEvent(new Event('ended'));
       },
       seeking: ({ currentTarget }) => {
         const media = currentTarget as HTMLMediaElement;
@@ -115,14 +148,7 @@ export class MediaGroupController extends EventTarget {
           return;
         }
 
-        if (currentTarget === this.#baseMedia) {
-          this.dispatchEvent(new Event('seeking'));
-        }
-      },
-      seeked: ({ currentTarget }) => {
-        if (currentTarget !== this.#baseMedia) return;
-
-        this.dispatchEvent(new Event('seeked'));
+        this.dispatchEvent(new Event('seeking'));
       },
       waiting: () => {
         if (this.#prevPlaybackRate != null) return;
@@ -144,16 +170,6 @@ export class MediaGroupController extends EventTarget {
       },
       progress: () => {
         this.dispatchEvent(new Event('progress'));
-      },
-      volumechange: ({ currentTarget }) => {
-        if (currentTarget !== this.#baseMedia) return;
-
-        this.dispatchEvent(new Event('volumechange'));
-      },
-      ratechange: ({ currentTarget }) => {
-        if (currentTarget !== this.#baseMedia) return;
-
-        this.dispatchEvent(new Event('ratechange'));
       },
     };
 
