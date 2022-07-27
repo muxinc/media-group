@@ -7,7 +7,7 @@ Resurrection of the [mediagroup attribute](https://html.spec.whatwg.org/commit-s
 ## Example ([CodeSandbox](https://codesandbox.io/s/media-group-4p9v81))
 
 ```html
-  <script src="https://unpkg.com/media-group"></script>
+  <script type="module" src="https://unpkg.com/media-group"></script>
 
   <video
     group="madmax"
@@ -15,14 +15,14 @@ Resurrection of the [mediagroup attribute](https://html.spec.whatwg.org/commit-s
     playsinline
     muted
   >
-    <source src="https://api.playerx.io/mad-max-fury-road-video-avc.mp4" />
+    <source src="https://stream.mux.com/ibw0201Usmvp9fcDyXRzGwCu01IZXiT5duks8OoO3OQ01e00/low.mp4" />
   </video>
 
   <audio
     group="madmax"
     controls
     playsinline
-    src="https://api.playerx.io/mad-max-fury-road-audio-fr.m4a"
+    src="https://stream.mux.com/0201RDkkUbY3501qR9fYuqOd8UXQNNyO3JLNcMG9kW4rpA/audio.m4a"
   ></audio>
 ```
 
