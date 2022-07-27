@@ -12,7 +12,11 @@
       href="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/themes/prism.min.css"
     />
     <link rel="stylesheet" href="./style.css" />
-    <script id="media-group-script" type="module" src="../dist/index.js"></script>
+    <script
+      id="media-group-script"
+      type="module"
+      src="../dist/index.js"
+    ></script>
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.min.js"
@@ -47,29 +51,30 @@
     </style>
   </head>
   <body>
+    <br />
     <h1>Sign Language (ASL)</h1>
     <br />
 
     <div class="example group-player">
-  <youtube-video
-    id="video"
-    group="asl"
-    src="https://www.youtube.com/watch?v=C7dPqrmDWxs"
-    controls
-    playsinline
-  ></youtube-video>
+      <youtube-video
+        id="video"
+        group="asl"
+        src="https://www.youtube.com/watch?v=C7dPqrmDWxs"
+        controls
+        playsinline
+      ></youtube-video>
 
-  <div class="dock">
-    <youtube-video
-      class="asl-video"
-      group="asl"
-      data-group-seek-precision="0.5"
-      src="https://www.youtube.com/watch?v=H3KSKS3TTbc"
-      controls
-      playsinline
-      muted
-    ></youtube-video>
-  </div>
+      <div class="dock">
+        <youtube-video
+          class="asl-video"
+          group="asl"
+          data-group-seek-precision="0.5"
+          src="https://www.youtube.com/watch?v=H3KSKS3TTbc"
+          controls
+          playsinline
+          muted
+        ></youtube-video>
+      </div>
     </div>
 
     <br />
@@ -82,52 +87,62 @@
 
     <br />
 
-    <p>You can even create media groups with YouTube videos by using the <a href="https://github.com/luwes/youtube-video-element"><code>&lt;youtube-video&gt;</code></a> webcomponent with a HTMLMediaElement compatible API.</p>
+    <p>
+      You can even create media groups with YouTube videos by using the
+      <a href="https://github.com/luwes/youtube-video-element"
+        ><code>&lt;youtube-video&gt;</code></a
+      >
+      webcomponent with a HTMLMediaElement compatible API.
+    </p>
+
+    <br />
 
     <script>
       let controller;
-      document.querySelector('#media-group-script').addEventListener('load', () => {
-        controller = video.groupController;
+      document
+        .querySelector('#media-group-script')
+        .addEventListener('load', () => {
+          controller = video.groupController;
 
-        controller.addEventListener('play', (e) => {
-          console.log(e.type);
-          console.log('paused', controller.paused);
-          playbtn.textContent = 'Pause';
+          controller.addEventListener('play', (e) => {
+            console.log(e.type);
+            console.log('paused', controller.paused);
+            playbtn.textContent = 'Pause';
+          });
+
+          controller.addEventListener('playing', (e) => {
+            console.log(e.type);
+            console.log('paused', controller.paused);
+            playbtn.textContent = 'Pause';
+          });
+
+          controller.addEventListener('pause', (e) => {
+            console.log(e.type);
+            console.log('paused', controller.paused);
+            playbtn.textContent = 'Play';
+          });
+
+          controller.addEventListener('seeking', (e) => {
+            console.log(e.type);
+          });
+
+          controller.addEventListener('seeked', (e) => {
+            console.log(e.type);
+          });
+
+          controller.addEventListener('waiting', (e) => {
+            console.log(e.type);
+          });
+
+          playbtn.onclick = async () => {
+            if (controller.playbackState === 'waiting') {
+              controller.play();
+              return;
+            }
+            await (controller.paused ? controller.play() : controller.pause());
+            console.log('controller.paused state', controller.paused);
+          };
         });
-
-        controller.addEventListener('playing', (e) => {
-          console.log(e.type);
-          console.log('paused', controller.paused);
-          playbtn.textContent = 'Pause';
-        });
-
-        controller.addEventListener('pause', (e) => {
-          console.log(e.type);
-          console.log('paused', controller.paused);
-          playbtn.textContent = 'Play';
-        });
-
-        controller.addEventListener('seeking', (e) => {
-          console.log(e.type);
-        });
-
-        controller.addEventListener('seeked', (e) => {
-          console.log(e.type);
-        });
-
-        controller.addEventListener('waiting', (e) => {
-          console.log(e.type);
-        });
-
-        playbtn.onclick = async () => {
-          if (controller.playbackState === 'waiting') {
-            controller.play();
-            return;
-          }
-          await (controller.paused ? controller.play() : controller.pause());
-          console.log('controller.paused state', controller.paused);
-        };
-      });
 
       fetch('./nav.html')
         .then((res) => res.text())

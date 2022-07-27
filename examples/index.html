@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Syncing Language Audio</title>
+    <title>Syncing Language Audio Tracks</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
@@ -12,36 +12,44 @@
       href="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/themes/prism.min.css"
     />
     <link rel="stylesheet" href="./style.css" />
-    <script id="media-group-script" type="module" src="../dist/index.js"></script>
+    <script
+      id="media-group-script"
+      type="module"
+      src="../dist/index.js"
+    ></script>
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/prismjs@1.28.0/prism.min.js"
     ></script>
   </head>
   <body>
-    <h1>Syncing Language Audio</h1>
+    <br />
+    <h1>Syncing Language Audio Tracks</h1>
     <br />
 
     <div class="example">
-  <video
-    id="video"
-    group="madmax"
-    controls
-    playsinline
-    muted
-    style="width: 100%"
-  >
-    <source src="https://stream.mux.com/ibw0201Usmvp9fcDyXRzGwCu01IZXiT5duks8OoO3OQ01e00/low.mp4" />
-  </video>
+      <video
+        id="video"
+        group="madmax"
+        controls
+        playsinline
+        muted
+        poster="https://image.mux.com/ibw0201Usmvp9fcDyXRzGwCu01IZXiT5duks8OoO3OQ01e00/thumbnail.jpg"
+        style="width: 100%"
+      >
+        <source
+          src="https://stream.mux.com/ibw0201Usmvp9fcDyXRzGwCu01IZXiT5duks8OoO3OQ01e00/low.mp4"
+        />
+      </video>
 
-  <audio
-    id="audiofr"
-    group="madmax"
-    controls
-    playsinline
-    src="https://stream.mux.com/0201RDkkUbY3501qR9fYuqOd8UXQNNyO3JLNcMG9kW4rpA/audio.m4a"
-    style="width: 100%"
-  ></audio>
+      <audio
+        id="audiofr"
+        group="madmax"
+        controls
+        playsinline
+        src="https://stream.mux.com/0201RDkkUbY3501qR9fYuqOd8UXQNNyO3JLNcMG9kW4rpA/audio.m4a"
+        style="width: 100%"
+      ></audio>
     </div>
 
     <br />
@@ -55,60 +63,68 @@
     </div>
 
     <br />
+
+    <p>
+      Easily add alternative audio tracks like languages or commentary by adding
+      grouped audio elements.
+    </p>
+
     <br />
 
     <script>
       let controller;
-      document.querySelector('#media-group-script').addEventListener('load', () => {
-        controller = video.groupController;
+      document
+        .querySelector('#media-group-script')
+        .addEventListener('load', () => {
+          controller = video.groupController;
 
-        controller.addEventListener('play', (e) => {
-          console.log(e.type);
-          playbtn.textContent = 'Pause';
+          controller.addEventListener('play', (e) => {
+            console.log(e.type);
+            playbtn.textContent = 'Pause';
+          });
+
+          controller.addEventListener('playing', (e) => {
+            console.log(e.type);
+            playbtn.textContent = 'Pause';
+          });
+
+          controller.addEventListener('pause', (e) => {
+            console.log(e.type);
+            playbtn.textContent = 'Play';
+          });
+
+          controller.addEventListener('seeking', (e) => {
+            console.log(e.type);
+          });
+
+          controller.addEventListener('seeked', (e) => {
+            console.log(e.type);
+          });
+
+          controller.addEventListener('waiting', (e) => {
+            console.log(e.type);
+          });
+
+          playbtn.onclick = () => {
+            if (controller.playbackState === 'waiting') {
+              controller.play();
+              return;
+            }
+            controller.paused ? controller.play() : controller.pause();
+          };
+
+          languagebtn.onclick = () => {
+            if (languagebtn.textContent === 'Change to English') {
+              video.muted = false;
+              audiofr.muted = true;
+              languagebtn.textContent = 'Change to French';
+            } else {
+              video.muted = true;
+              audiofr.muted = false;
+              languagebtn.textContent = 'Change to English';
+            }
+          };
         });
-
-        controller.addEventListener('playing', (e) => {
-          console.log(e.type);
-          playbtn.textContent = 'Pause';
-        });
-
-        controller.addEventListener('pause', (e) => {
-          console.log(e.type);
-          playbtn.textContent = 'Play';
-        });
-
-        controller.addEventListener('seeking', (e) => {
-          console.log(e.type);
-        });
-
-        controller.addEventListener('seeked', (e) => {
-          console.log(e.type);
-        });
-
-        controller.addEventListener('waiting', (e) => {
-          console.log(e.type);
-        });
-
-        playbtn.onclick = () => {
-          if (controller.playbackState === 'waiting') {
-            controller.play();
-            return;
-          }
-          controller.paused ? controller.play() : controller.pause();
-        };
-
-        languagebtn.onclick = () => {
-          if (languagebtn.textContent === 'Change to English') {
-            video.muted = false;
-            audiofr.muted = true;
-            languagebtn.textContent = 'Change to French';
-          } else {
-            video.muted = true;
-            audiofr.muted = false;
-            languagebtn.textContent = 'Change to English';
-          }
-        };
-      });
 
       fetch('./nav.html')
         .then((res) => res.text())
