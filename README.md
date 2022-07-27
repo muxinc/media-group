@@ -4,7 +4,7 @@ Resurrection of the [mediagroup attribute](https://html.spec.whatwg.org/commit-s
 
 ⚠️ This library is designed as a ponyfill but note that `MediaController` is renamed to `MediaGroupController` and the `mediagroup` attribute is renamed to just `group` to avoid any issues with Safari where the original API is still implemented (while not working properly).
 
-## Example
+## Example ([CodeSandbox](https://codesandbox.io/s/media-group-4p9v81))
 
 ```html
   <script src="https://unpkg.com/media-group"></script>
