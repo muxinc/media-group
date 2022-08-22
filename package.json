@@ -31,7 +31,7 @@
     "@open-wc/testing": "^3.1.6",
     "@typescript-eslint/parser": "^5.32.0",
     "@web/dev-server-esbuild": "^0.3.1",
-    "@web/test-runner": "^0.13.31",
+    "@web/test-runner": "^0.14.0",
     "esbuild": "^0.15.5",
     "eslint": "^8.21.0",
     "prettier": "^2.6.2",
