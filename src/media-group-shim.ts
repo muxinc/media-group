@@ -3,8 +3,8 @@ import { MediaGroupController } from './media-group-controller';
 declare global {
   // eslint-disable-next-line
   interface HTMLMediaElement {
-    groupController: MediaGroupController;
-    group: string;
+    groupController?: MediaGroupController;
+    group?: string;
   }
 }
 
@@ -45,7 +45,7 @@ function toggleMediaGroup(node: Node) {
         get() {
           return MediaGroupController.get(this);
         },
-        set(controller: MediaGroupController) {
+        set(controller?: MediaGroupController) {
           MediaGroupController.set(this, controller);
         },
       });
@@ -54,7 +54,7 @@ function toggleMediaGroup(node: Node) {
         get() {
           return MediaGroupController.getId(this);
         },
-        set(groupId: string) {
+        set(groupId?: string) {
           MediaGroupController.setId(this, groupId);
         },
       });
@@ -62,6 +62,27 @@ function toggleMediaGroup(node: Node) {
     // group can be null removing the controller from the media element.
     MediaGroupController.setId(mediaElement, mediaElement.group);
   }
+}
+
+const proto = HTMLMediaElement.prototype;
+if (!('groupController' in proto)) {
+  Object.defineProperty(proto, 'groupController', {
+    get() {
+      return MediaGroupController.get(this);
+    },
+    set(controller?: MediaGroupController) {
+      MediaGroupController.set(this, controller);
+    },
+  });
+
+  Object.defineProperty(proto, 'group', {
+    get() {
+      return MediaGroupController.getId(this);
+    },
+    set(groupId?: string) {
+      MediaGroupController.setId(this, groupId);
+    },
+  });
 }
 
 function isMediaElement(node: any) {

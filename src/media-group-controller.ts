@@ -289,7 +289,7 @@ export class MediaGroupController extends EventTarget {
   }
 
   async #safariSyncMedia() {
-    if (this.#baseMedia.localName.includes('-')) {
+    if (this.#baseMedia.localName?.includes('-')) {
       await customElements.whenDefined(this.#baseMedia.localName);
     }
 
@@ -380,7 +380,7 @@ export class MediaGroupController extends EventTarget {
 
   // Adapted from https://github.com/tjenkinson/media-element-syncer (WL)
   async #syncMedia() {
-    if (this.#baseMedia.localName.includes('-')) {
+    if (this.#baseMedia.localName?.includes('-')) {
       await customElements.whenDefined(this.#baseMedia.localName);
     }
 
