@@ -7,7 +7,7 @@ Resurrection of the [mediagroup attribute](https://html.spec.whatwg.org/commit-s
 ## Example ([CodeSandbox](https://codesandbox.io/s/media-group-4p9v81))
 
 ```html
-<script type="module" src="https://unpkg.com/media-group"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/media-group"></script>
 
 <video
   group="madmax"
