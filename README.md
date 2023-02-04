@@ -1,4 +1,4 @@
-# media-group ([examples](https://media-group-mux.vercel.app/examples/))
+# media-group
 
 Resurrection of the [mediagroup attribute](https://html.spec.whatwg.org/commit-snapshots/a4c46fc65e8ba138baeadf0bd1c2055b7bb43863/#attr-media-mediagroup) and [MediaController API](https://html.spec.whatwg.org/commit-snapshots/a4c46fc65e8ba138baeadf0bd1c2055b7bb43863/#synchronising-multiple-media-elements) (but renamed) which can be used to sync and control multiple audio / video elements.
 
