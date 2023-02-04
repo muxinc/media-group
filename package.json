@@ -20,12 +20,12 @@
     "build:esm": "esbuild src/index.ts --bundle --format=esm --minify --sourcemap --outdir=dist",
     "build:types": "tsc --declaration --emitDeclarationOnly --outDir dist/types"
   },
-  "repository": "luwes/media-group",
+  "repository": "muxinc/media-group",
   "author": "Wesley Luyten <me@wesleyluyten.com> (https://wesleyluyten.com)",
   "license": "MIT",
-  "homepage": "https://github.com/luwes/media-group#readme",
+  "homepage": "https://github.com/muxinc/media-group#readme",
   "bugs": {
-    "url": "https://github.com/luwes/media-group/issues"
+    "url": "https://github.com/muxinc/media-group/issues"
   },
   "devDependencies": {
     "@open-wc/testing": "^3.1.6",
