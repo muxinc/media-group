@@ -14,9 +14,8 @@
     "lint": "eslint src/*",
     "test": "web-test-runner **/*test.js --config test/web-test-runner.config.mjs",
     "dev": "esbuild src/index.ts --bundle --format=esm --outdir=dist --servedir=.",
-    "build": "npm run build:iife && npm run build:esm && npm run build:types",
-    "build:iife": "esbuild src/index.ts --bundle --minify --sourcemap --outfile=dist/index.iife.js",
-    "build:esm": "esbuild src/index.ts --bundle --format=esm --minify --sourcemap --outdir=dist",
+    "build": "npm run build:esm && npm run build:types",
+    "build:esm": "esbuild src/index.ts --bundle --format=esm --outdir=dist",
     "build:types": "tsc --declaration --emitDeclarationOnly --outDir dist/types"
   },
   "repository": "muxinc/media-group",
