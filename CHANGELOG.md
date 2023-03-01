@@ -1,3 +1,12 @@
+## [0.1.5](https://github.com/muxinc/media-group/compare/v0.1.4...v0.1.5) (2023-03-01)
+
+
+### Bug Fixes
+
+* Mux player group use case fix [#64](https://github.com/muxinc/media-group/issues/64) ([#65](https://github.com/muxinc/media-group/issues/65)) ([fefdc44](https://github.com/muxinc/media-group/commit/fefdc4404a2907c9548ce07e61cf9c82ef758f60))
+
+
+
 ## [0.1.3](https://github.com/muxinc/media-group/compare/v0.1.2...v0.1.3) (2022-07-27)
 
 ### Bug Fixes
