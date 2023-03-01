@@ -89,6 +89,7 @@ function isMediaElement(node: any) {
   return (
     node instanceof HTMLMediaElement ||
     node.localName?.endsWith('video') ||
-    node.localName?.endsWith('audio')
+    node.localName?.endsWith('audio') ||
+    node.localName?.endsWith('player')
   );
 }

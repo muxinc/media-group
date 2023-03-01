@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Media Group</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <script
+      id="media-group-script"
+      type="module"
+      src="../dist/index.js"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mux/mux-player"></script>
+  </head>
+
+  <body>
+    <br>
+    <h1>Syncing 2 Mux Player's</h1>
+    <br>
+
+    <mux-player
+      id="video"
+      group="muxTest"
+      muted
+      stream-type="on-demand"
+      playback-id="EcHgOK9coz5K4rjSwOkoE7Y7O01201YMIC200RI6lNxnhs"
+      metadata-video-title="Test VOD"
+      metadata-viewer-user-id="user-id-007"
+    ></mux-player>
+
+    <br>
+    <br>
+
+    <mux-player
+      id="video2"
+      group="muxTest"
+      muted
+      stream-type="on-demand"
+      playback-id="901Jmt5uaWAc5dNzvvxxFysxxaDUf01IxbukSFshrXHDs"
+      metadata-video-title="Test VOD"
+      metadata-viewer-user-id="user-id-007"
+    ></mux-player>
+
+    <script>
+      fetch('./nav.html')
+        .then((res) => res.text())
+        .then((text) => {
+          let tmp = document.createElement('template');
+          tmp.innerHTML = text;
+          document.body.prepend(tmp.content);
+        });
+    </script>
+
+  </body>
+</html>
